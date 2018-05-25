@@ -1,0 +1,16 @@
+usage:
+-a simple channel implementation using circular buffers
+-produces lists of numbers from items to produce to in each of the producers. 
+-concurrently consumes each of the items in a consumer by writing to stdout.
+
+channels <num producers> <num consumers> <items to produce> 
+
+testing so far:
+This is a rough start. There are some larger issues (only one lock, not 
+seperate send/recv locks), it seems that a large cost comes simply
+from calculating position in the circular buffer (the end function), which is
+just a simple pure function, the largest cost is definitely in the reciever.
+Further testing will follow.
+
+There is also a profile file, a sample outfile (which matches logical tests  
+1000001 items * 10 producers = 10000010 consumers), and an analysis.
